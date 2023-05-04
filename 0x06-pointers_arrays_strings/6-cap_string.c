@@ -6,7 +6,7 @@
  * Return: caps on first letter of a separator
  */
 
-char *cap_string(char *n)
+char *cap_string(char *str)
 {
 	int i = 0;
 
