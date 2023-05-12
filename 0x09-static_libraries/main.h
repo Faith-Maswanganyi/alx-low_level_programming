@@ -1,6 +1,12 @@
 #ifndef MAIN_H
 #define MAIN_H
-
+/**
+ * _strcat - concats strings
+ * @dest: destination of string
+ * @src: source of string to concat
+ *
+ * Return: returns char value
+ */
 int _putchar(char c);
 int _islower(int c);
 int _isalpha(int c);
