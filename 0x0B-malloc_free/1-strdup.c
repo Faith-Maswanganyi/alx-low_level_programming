@@ -3,13 +3,13 @@
 #include <stdio.h>
 
 /**
- * _strdup - returns a pointer to a new duplicate of the string
+ * _strdup - returns a pointer to the new duplicated string
  * @str: char
- * Return: pointer to the duplicated string or NULL
+ * Return: a pointer to the array or NULL if it fails
  */
 char *_strdup(char *str)
 {
-	char *a;
+	char *abc;
 	int i;
 
 	r = 0;
@@ -19,10 +19,12 @@ char *_strdup(char *str)
 	i = 0;
 	while (str[i] != '\0')
 		i++;
-	a = malloc(sizeof(char) * (i + 1));
-	if (a == NULL)
+	abc = malloc(sizeof(char) * (i + 1));
+
+	if (abc == NULL)
 		return (NULL);
 	for (r = 0; str[r]; r++)
-		a[r] = str[r]
-			return (a);
+		abc[r] = str[r];
+
+	return (abc);
 }
