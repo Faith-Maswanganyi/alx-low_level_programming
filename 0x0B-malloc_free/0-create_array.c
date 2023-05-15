@@ -1,7 +1,7 @@
 #include "main.h"
 #include <stdlib.h>
 /**
- * create_array - creates an array of sixe and assign char
+ * create_array - creates an array of size and assign char
  * @size: size of the array
  * @c: char to assign
  * Return: a pointer to the array, NULL if fails
