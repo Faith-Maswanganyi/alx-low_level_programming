@@ -1,52 +1,75 @@
 #include "main.h"
-#include <stdio.h>
 #include <stdlib.h>
+#include <stdio.h>
 
-/** strtow - function that splits string into words
- * @str: string being passed
- * Return: null if string is empty or null or function fails
+/**
+ * wordcount - helper function to count the number of words in a string
+ * @s: string to evaluate
+ *
+ * Return: number of words
+ */
+int wordcount(char *s)
+{
+	int f, c, w;
+
+	f = 0;
+	w = 0;
+
+	for (c = 0; s[c] != '\0'; c++)
+	{
+		if (s[c] == ' ')
+			f = 0;
+		else if (f == 0)
+		{
+			f = 1;
+			w++;
+		}
+	}
+	return (w);
+}
+/**
+ * **strtow - splits a string into words
+ * @str: string to split
+ *
+ * Return: pointer to an array of strings (Success)
+ * or NULL (Error)
  */
 char **strtow(char *str)
 {
+	char **m, *t;
+	int i, k = 0, l = 0, w, c = 0, st, e;
 
-	int total_words = 0, b = 0, c = 0, length = 0;
-	char **words, *found_word;
+	while (*(str + l))
+		l++;
+	w = wordcount(str);
+	if (w == 0)
+		return (NULL);
 
-	if (str == 0 || *str == 0)
-		return (NULL);
-	total_words = number(str);
-	if (total_words == 0)
-		return (NULL);
-	words = malloc((total_words + 1) * sizeof(char *));
-	if (words == 0)
-		return (NULL);
-	for (; *str != '\0' &&  b < total_words;)
+	m = (char **)malloc(sizeof(char *) * (w + 1));
+		if (m == NULL)
+			return (NULL);
+
+	for (i = 0; i <= l; i++)
 	{
-		if (*str == ' ')
-			str++;
-		else
+		if (str[i] == ' ' || str[i] == '\0')
 		{
-			found_word = str;
-			for (; *str != ' ' && *str != '\0';)
+			if (c)
 			{
-				length++;
-				str++;
+				e = i;
+				t = (char *)malloc(sizeof(char) * (c + 1));
+				if (t == NULL)
+					return (NULL);
+				while (st < e)
+					*t++ = str[st++];
+				*t = '\0';
+				m[k] = t - c;
+				k++;
+				c = 0;
 			}
-			words[b] = malloc((length + 1) * sizeof(char));
-			if (words[b] == 0)
-			{
-				free_everything(words, b);
-				return (NULL);
-			}
-			while (*found_word != ' ' && *found_word != '\0')
-			{
-				words[b][c] = *found_word;
-				found_word++;
-				c++;
-			}
-			words[b][c] = '\0';
-			b++; c = 0; length = 0; str++;
 		}
+		else if (c++ == 0)
+			st = i;
 	}
-	return (words);
+	m[k] = NULL;
+	return (m);
 }
