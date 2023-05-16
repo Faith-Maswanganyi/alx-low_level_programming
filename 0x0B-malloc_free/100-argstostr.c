@@ -1,41 +1,39 @@
 #include "main.h"
 #include <stdlib.h>
+#include <stdio.h>
 
 /**
- * argstostr - main entry
- * @ac: int input
- * @av: double pointer array
- * Return: 0
+ * argstostr - concatenates all arguments of program.
+ * @ac: argument count
+ * @av: pointer to argument vectors
+ * Return: pointer to new buffer with all arguments as 1 string.
  */
 char *argstostr(int ac, char **av)
 {
-	int i, n, r = 0, l = 0;
+	int i, j, k, buff;
+	char *p;
 
-	char *str;
-
-	if (ac == 0 || av == NULL)
+	if (ac == 0)
+		return (NULL);
+	if (av == NULL)
 		return (NULL);
 
-	for (i = 0; i < ac; i++)
+	i = j = k = buff = 0;
+	for (i = 0; av[i]; i++)
 	{
-		for (n = 0; av[i][n]; n++)
-			i++;
+		for (j = 0; av[i][j]; j++)
+			k++;
 	}
-	l += ac;
-	str = malloc(sizeof(char) * l + 1);
-	if (str == NULL)
+	p = (char *)malloc(k * sizeof(char) + ac + 1);
+	if (p == NULL)
 		return (NULL);
-	for (i = 0; i < ac; i++)
+	for (i = 0; av[i]; i++)
 	{
-		for (n = 0; av[i][n]; n++)
-		{
-			str[r] = av[i][n];
-			r++;
-		}
-		if (str[r] == '\0')
-		{
-			str[r++] = '\n';
-		}
+		for (j = 0; av[i][j]; j++, buff++)
+			p[buff] = av[i][j];
+		p[buff] = '\n';
+		buff++;
 	}
-	return (str);
+	p[buff] = '\0';
+	return (p);
 }
