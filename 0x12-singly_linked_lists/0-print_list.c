@@ -13,10 +13,10 @@ size_t count = 0;
 
 while (current != NULL)
 {
-	printf('%d ', current->data);
-	count++;
-	current = current->next;
+if (current->str != NULL)
+printf("[%d] %s\n", current->len, current->str);
+current = current->next;
 }
-printf('\n');
+
 return (count);
 }
